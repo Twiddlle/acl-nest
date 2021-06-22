@@ -1,6 +1,6 @@
 {
   "name": "acl-nest",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ACL nestjs module functionality using casbin package",
   "scripts": {
     "test": "jest --collect-coverage",
@@ -15,8 +15,12 @@
   },
   "main": "index.js",
   "keywords": [
-    "platform",
-    "core",
+    "acl",
+    "casbin",
+    "nest",
+    "guard",
+    "permission",
+    "access control",
     "nestjs"
   ],
   "author": "Vladimir Durana",
