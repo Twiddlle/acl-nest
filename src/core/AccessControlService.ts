@@ -31,7 +31,6 @@ export class AccessControlService implements OnModuleInit {
     const multiParamsSet = []
     for (const paramIndex in params) {
       const param = params[paramIndex]
-      // @ts-ignore
       if (param instanceof Array) {
         for (const multiParamItem of param) {
           const singleParams = [...params]

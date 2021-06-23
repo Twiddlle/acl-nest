@@ -32,7 +32,7 @@ import * as path from "path";
 })
 export class CustomTestingModule{}
 ```
-Note: Example of configurations can be found [here](https://casbin.org/docs/en/supported-models)
+Note: Example of casbin configurations can be found [here](https://casbin.org/docs/en/supported-models)
 
 ### Adding controller
 Decorate you controller methods
@@ -56,8 +56,7 @@ export class YourController {
     @Get('getLastName')
     @AccessControlAction(['name', 'read'], (params, context, accessControlService) => {
       const request = context.switchToHttp().getRequest();
-      request.user = request.headers['x-user-name']
-      return accessControlService.hasPermission([request.user, ...params])
+      return accessControlService.hasPermission([request.headers['x-user-name'], ...params])
     })
     public getLastName(): string {
       return 'Wick'
@@ -82,7 +81,7 @@ export class YourController {
       @Req() request: Request
     ): Promise<number> {
       // we need to call checkPermission instead of hasPermission
-      // because check permission will throw same Error as Guard used in decorators, instead or returning bool
+      // because check permission will throw same Error as Guard used in decorators, instead or returning boolean
       await this.accessControlService.checkPermission([request.headers['x-user'], 'age', 'read'])
       return 32;
     }
@@ -157,4 +156,6 @@ export class YourController {
   }
 }
 ```
-In this case all combinations of specified params will be checked
+In this case all combinations of specified params will be checked. 
+The reason why this functionality was created 
+is to have option check all permissions without specifying unnecessary aliases for other model properties.
