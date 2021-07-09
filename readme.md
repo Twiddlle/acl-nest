@@ -19,8 +19,8 @@ import * as path from "path";
 @Module({
   imports: [
     AccessControlModule.register(
-      'path to your model config',
-      'path to your policy config',
+      'path to your model config or function wich returns model as text',
+      'path to your policy config or function wich returns policy as text',
       (params, context, accessControlService)=>{
         const request = context.switchToHttp().getRequest();
         request.user = request.headers['x-user']
@@ -119,8 +119,8 @@ export class UserMiddleware implements NestMiddleware {
 @Module({
   imports: [
     AccessControlModule.register(
-      'path to your model config',
-      'path to your policy config',
+      'path to your model config or function wich returns model as text',
+      'path to your policy config or function wich returns policy as text',
       (params, context, accessControlService) => {
         const request = context.switchToHttp().getRequest();
         return accessControlService.hasPermission([request.userEntity.name, ...params])

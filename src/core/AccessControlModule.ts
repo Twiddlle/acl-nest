@@ -2,6 +2,7 @@ import {DynamicModule, Global, Module, Provider} from '@nestjs/common';
 import {AccessControlService} from './AccessControlService';
 import {ModuleRef} from '@nestjs/core';
 import {ValidationFunction} from './AccessControlAction';
+import {AccessControlConfigParam} from "./AccessControlActionTypes";
 
 @Global()
 @Module({
@@ -22,8 +23,8 @@ export class AccessControlModule {
   }
 
   public static register(
-    modelPath: string,
-    policyPath: string,
+    modelPath: AccessControlConfigParam,
+    policyPath: AccessControlConfigParam,
     validationFunction?: ValidationFunction,
   ): DynamicModule {
     const providers: Provider[] = [
