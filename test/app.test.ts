@@ -22,6 +22,7 @@ describe('app', () => {
   afterAll(async () => {
     await app.close()
     await appWithMiddleware.close()
+    await appWithFunctionConfigs.close()
   })
 
 
