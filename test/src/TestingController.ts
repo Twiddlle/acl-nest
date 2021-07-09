@@ -26,8 +26,7 @@ export class TestingController {
   @Get('getLastName')
   @AccessControlAction(['name', 'read'], (params, context, accessControlService) => {
     const request = context.switchToHttp().getRequest();
-    request.user = request.headers['x-user-name']
-    return accessControlService.hasPermission([request.user, ...params])
+    return accessControlService.hasPermission([request.headers['x-user-name'], ...params])
   })
   public getLastName(): string {
     return 'Wick'
