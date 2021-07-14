@@ -23,7 +23,7 @@ import * as path from "path";
       'path to your policy config or function wich returns policy as text',
       (params, context, accessControlService)=>{
         const request = context.switchToHttp().getRequest();
-        request.user = request.headers['x-user']
+        request.user = request.headers['x-user'] // here you can do any custom logic
         return accessControlService.hasPermission([request.user, ...params])
       }
     )
@@ -94,9 +94,35 @@ export class YourController {
 Sometime is necessary to load some user data, or handle some request to auth user before checking permissions.
 But registered validation function has available only ExecutionContext 
 which cannot help us to get some other service to load user for example.
-Good approach here is to use middlewares, which are executed before Guards.
+Good approach here is to use middlewares, which are executed before Guards or register module asynchronously.
 
-#### First create middleware
+#### 1. Register Module asynchronous with injected dependencies
+```typescript
+@Module({
+  imports: [
+    AccessControlModule.registerAsync({
+      inject: [UserService], // you can inject anything here
+      useFactory: (userService: UserService) => {
+        return {
+          modelPath: path.join(__dirname, '..', 'config', 'model.test.conf'),
+          policyPath: path.join(__dirname, '..', 'config', 'policy.test.conf'),
+          validationFunction: async (params, context, accessControlService) => {
+            const request = context.switchToHttp().getRequest();
+            const userName = await userService.getUserFromRequest(request) // you can use injected service
+            return accessControlService.hasPermission([userName, ...params])
+          },
+        }
+      }
+    })
+  ],
+})
+export class TestingModuleAsync {
+}
+```
+
+#### 2. Middleware usage
+
+##### First create middleware
 ```typescript
 @Injectable()
 export class UserMiddleware implements NestMiddleware {
@@ -113,7 +139,7 @@ export class UserMiddleware implements NestMiddleware {
 }
 ```
 
-#### Register middleware and write your validation function
+##### Register middleware and write your validation function
 ```typescript
 @Module({
   imports: [
