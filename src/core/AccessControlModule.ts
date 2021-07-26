@@ -1,4 +1,4 @@
-import {DynamicModule, Global, Module, Provider} from '@nestjs/common';
+import {DynamicModule, Global, Module, Provider, Type} from '@nestjs/common';
 import {AccessControlService} from './AccessControlService';
 import {ModuleRef} from '@nestjs/core';
 import {ValidationFunction} from './AccessControlAction';
@@ -13,7 +13,6 @@ import {AccessControlConfigParam} from "./AccessControlActionTypes";
     AccessControlService
   ]
 })
-
 export class AccessControlModule {
 
   private accessControlService: AccessControlService;
@@ -41,4 +40,38 @@ export class AccessControlModule {
       exports: providers,
     };
   }
+
+  public static registerAsync(
+    options: {
+      inject?: Type[],
+      imports?: Type[],
+      useFactory: (...injectedDeps) => Promise<AccessControlModuleOptions> | AccessControlModuleOptions,
+    }
+  ): DynamicModule {
+    const providers: Provider[] = [
+      ...options.inject,
+      {
+        provide: AccessControlService,
+        useFactory: async (...dependenciesInjected): Promise<AccessControlService> => {
+          const factoryOptions = await options.useFactory(...dependenciesInjected)
+          return new AccessControlService(
+            factoryOptions.modelPath, factoryOptions.policyPath, factoryOptions.validationFunction
+          )
+        },
+        inject: options.inject
+      }
+    ]
+    return {
+      imports: options.imports,
+      module: AccessControlModule,
+      providers,
+      exports: providers,
+    };
+  }
+}
+
+export interface AccessControlModuleOptions {
+  modelPath: AccessControlConfigParam,
+  policyPath: AccessControlConfigParam,
+  validationFunction?: ValidationFunction,
 }
