@@ -1,6 +1,11 @@
-import {applyDecorators, ExecutionContext, SetMetadata, UseGuards} from '@nestjs/common';
-import {AccessControlGuard} from './AccessControlGuard';
-import {AccessControlService} from './AccessControlService';
+import {
+  applyDecorators,
+  ExecutionContext,
+  SetMetadata,
+  UseGuards,
+} from '@nestjs/common';
+import { AccessControlGuard } from './AccessControlGuard';
+import { AccessControlService } from './AccessControlService';
 
 export type ValidationFunction = (
   params: (string | string[])[],
@@ -11,12 +16,11 @@ export type ValidationFunction = (
 
 export const AccessControlAction = (
   params: (string | string[])[],
-  processCustomValidation?: ValidationFunction
+  processCustomValidation?: ValidationFunction,
 ): PropertyDecorator => {
   return applyDecorators(
     SetMetadata(AccessControlAction.name, params),
     SetMetadata(AccessControlAction.name + 'Fn', processCustomValidation),
     UseGuards(AccessControlGuard),
-  )
-}
-
+  );
+};

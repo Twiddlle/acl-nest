@@ -1,8 +1,8 @@
-import {Module} from "@nestjs/common";
-import {AccessControlModule} from "../../src/core/AccessControlModule";
-import * as path from "path";
-import {TestingController} from "./TestingController";
-import {TestingUserService} from "./TestingUserService";
+import { Module } from '@nestjs/common';
+import { AccessControlModule } from '../../src/core/AccessControlModule';
+import * as path from 'path';
+import { TestingController } from './TestingController';
+import { TestingUserService } from './TestingUserService';
 
 @Module({
   imports: [
@@ -14,14 +14,15 @@ import {TestingUserService} from "./TestingUserService";
           policyPath: path.join(__dirname, '..', 'config', 'policy.test.conf'),
           validationFunction: async (params, context, accessControlService) => {
             const request = context.switchToHttp().getRequest();
-            const userName = await testingUserService.getUserFromRequest(request)
-            return accessControlService.hasPermission([userName, ...params])
+            const userName = await testingUserService.getUserFromRequest(
+              request,
+            );
+            return accessControlService.hasPermission([userName, ...params]);
           },
-        }
-      }
-    })
+        };
+      },
+    }),
   ],
-  controllers: [TestingController]
+  controllers: [TestingController],
 })
-export class TestingModuleAsync {
-}
+export class TestingModuleAsync {}

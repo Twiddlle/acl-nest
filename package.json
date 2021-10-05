@@ -1,13 +1,14 @@
 {
   "name": "acl-nest",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "ACL nestjs module functionality using casbin package",
   "scripts": {
     "test": "jest --collect-coverage",
     "eslint": "eslint ./src/** --no-error-on-unmatched-pattern",
     "eslint:fix": "eslint ./src/** --fix --no-error-on-unmatched-pattern",
     "eslint:fix:dry": "eslint ./src/** --fix-dry-run --no-error-on-unmatched-pattern",
-    "build": "tsc --project ./tsconfig.json"
+    "build": "tsc --project ./tsconfig.json",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "eslint": "^7.31.0",
     "express": "^4.17.1",
     "jest": "^27.0.6",
+    "prettier": "^2.4.1",
     "supertest": "^6.1.4",
     "ts-jest": "^27.0.4",
     "ts-node": "^10.1.0",
@@ -62,8 +64,8 @@
     "@nestjs/core": "^8.0.0"
   },
   "dependencies": {
-    "@nestjs/common": "^8.0.4",
-    "@nestjs/core": "^8.0.4",
+    "@nestjs/common": "^8.0.0",
+    "@nestjs/core": "^8.0.0",
     "casbin": "^5.11.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"

@@ -1,24 +1,19 @@
-import {DynamicModule, Global, Module, Provider, Type} from '@nestjs/common';
-import {AccessControlService} from './AccessControlService';
-import {ModuleRef} from '@nestjs/core';
-import {ValidationFunction} from './AccessControlAction';
-import {AccessControlConfigParam} from "./AccessControlActionTypes";
+import { DynamicModule, Global, Module, Provider, Type } from '@nestjs/common';
+import { AccessControlService } from './AccessControlService';
+import { ModuleRef } from '@nestjs/core';
+import { ValidationFunction } from './AccessControlAction';
+import { AccessControlConfigParam } from './AccessControlActionTypes';
 
 @Global()
 @Module({
-  providers: [
-    AccessControlService
-  ],
-  exports: [
-    AccessControlService
-  ]
+  providers: [AccessControlService],
+  exports: [AccessControlService],
 })
 export class AccessControlModule {
-
   private accessControlService: AccessControlService;
 
   public constructor(private moduleRef: ModuleRef) {
-    this.accessControlService = moduleRef.get(AccessControlService)
+    this.accessControlService = moduleRef.get(AccessControlService);
   }
 
   public static register(
@@ -30,8 +25,12 @@ export class AccessControlModule {
       {
         provide: AccessControlService,
         useFactory: (): AccessControlService => {
-          return new AccessControlService(modelPath, policyPath, validationFunction)
-        }
+          return new AccessControlService(
+            modelPath,
+            policyPath,
+            validationFunction,
+          );
+        },
       },
     ];
     return {
@@ -41,26 +40,32 @@ export class AccessControlModule {
     };
   }
 
-  public static registerAsync(
-    options: {
-      inject?: Type[],
-      imports?: Type[],
-      useFactory: (...injectedDeps) => Promise<AccessControlModuleOptions> | AccessControlModuleOptions,
-    }
-  ): DynamicModule {
+  public static registerAsync(options: {
+    inject?: Type[];
+    imports?: Type[];
+    useFactory: (
+      ...injectedDeps
+    ) => Promise<AccessControlModuleOptions> | AccessControlModuleOptions;
+  }): DynamicModule {
     const providers: Provider[] = [
       ...options.inject,
       {
         provide: AccessControlService,
-        useFactory: async (...dependenciesInjected): Promise<AccessControlService> => {
-          const factoryOptions = await options.useFactory(...dependenciesInjected)
+        useFactory: async (
+          ...dependenciesInjected
+        ): Promise<AccessControlService> => {
+          const factoryOptions = await options.useFactory(
+            ...dependenciesInjected,
+          );
           return new AccessControlService(
-            factoryOptions.modelPath, factoryOptions.policyPath, factoryOptions.validationFunction
-          )
+            factoryOptions.modelPath,
+            factoryOptions.policyPath,
+            factoryOptions.validationFunction,
+          );
         },
-        inject: options.inject
-      }
-    ]
+        inject: options.inject,
+      },
+    ];
     return {
       imports: options.imports,
       module: AccessControlModule,
@@ -71,7 +76,7 @@ export class AccessControlModule {
 }
 
 export interface AccessControlModuleOptions {
-  modelPath: AccessControlConfigParam,
-  policyPath: AccessControlConfigParam,
-  validationFunction?: ValidationFunction,
+  modelPath: AccessControlConfigParam;
+  policyPath: AccessControlConfigParam;
+  validationFunction?: ValidationFunction;
 }
