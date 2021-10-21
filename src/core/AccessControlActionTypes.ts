@@ -1,1 +1,3 @@
-export type AccessControlConfigParam = string | (() => Promise<string> | string);
+export type AccessControlConfigParam =
+  | string
+  | (() => Promise<string> | string);

@@ -7,7 +7,8 @@
     "eslint": "eslint ./src/** --no-error-on-unmatched-pattern",
     "eslint:fix": "eslint ./src/** --fix --no-error-on-unmatched-pattern",
     "eslint:fix:dry": "eslint ./src/** --fix-dry-run --no-error-on-unmatched-pattern",
-    "build": "tsc --project ./tsconfig.json"
+    "build": "tsc --project ./tsconfig.json",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
     "express": "^4.17.1",
     "jest": "^27.0.6",
     "rxjs": "^6.5.1",
+    "prettier": "^2.4.1",
     "supertest": "^6.1.4",
     "ts-jest": "^27.0.4",
     "ts-node": "^10.1.0",
