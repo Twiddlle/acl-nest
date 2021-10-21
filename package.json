@@ -1,6 +1,6 @@
 {
   "name": "acl-nest",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "ACL nestjs module functionality using casbin package",
   "scripts": {
     "test": "jest --collect-coverage",
@@ -26,7 +26,9 @@
   "author": "Vladimir Durana",
   "license": "ISC",
   "devDependencies": {
-    "@nestjs/platform-express": "^8.0.4",
+    "@nestjs/common": "^7.0.0",
+    "@nestjs/core": "^7.0.0",
+    "@nestjs/platform-express": "^7.0.0",
     "@types/express": "^4.17.13",
     "@types/jest": "^26.0.24",
     "@types/node": "^16.4.3",
@@ -36,6 +38,7 @@
     "eslint": "^7.31.0",
     "express": "^4.17.1",
     "jest": "^27.0.6",
+    "rxjs": "^6.5.1",
     "supertest": "^6.1.4",
     "ts-jest": "^27.0.4",
     "ts-node": "^10.1.0",
@@ -58,14 +61,12 @@
     ]
   },
   "peerDependencies": {
-    "@nestjs/common": "^8.0.0",
-    "@nestjs/core": "^8.0.0"
+    "@nestjs/common": ">=7",
+    "@nestjs/core": ">=7",
+    "@rxjs": ">=6.5.1"
   },
   "dependencies": {
-    "@nestjs/common": "^8.0.4",
-    "@nestjs/core": "^8.0.4",
     "casbin": "^5.11.0",
-    "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.2.0"
+    "reflect-metadata": "^0.1.13"
   }
 }

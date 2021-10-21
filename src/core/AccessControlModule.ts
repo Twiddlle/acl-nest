@@ -43,8 +43,8 @@ export class AccessControlModule {
 
   public static registerAsync(
     options: {
-      inject?: Type[],
-      imports?: Type[],
+      inject?: Type<unknown>[],
+      imports?: Type<unknown>[],
       useFactory: (...injectedDeps) => Promise<AccessControlModuleOptions> | AccessControlModuleOptions,
     }
   ): DynamicModule {
