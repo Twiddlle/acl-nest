@@ -1,5 +1,11 @@
 # ACL Nest
 
+![Package version](https://img.shields.io/npm/v/acl-nest?label=version)
+![Package types definitions](https://github.com/Twiddlle/acl-nest//actions/workflows/main.yml/badge.svg)
+![Package types definitions](https://img.shields.io/github/issues-raw/Twiddlle/acl-nest)
+![Top language](https://img.shields.io/github/languages/top/Twiddlle/acl-nest)
+![Package downloads](https://img.shields.io/npm/dm/acl-nest)
+
 ACL nestjs module functionality using casbin package
 
 Install package
