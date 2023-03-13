@@ -16,7 +16,7 @@ npm i acl-nest --save
 ## Usage
 
 ### Module registration
-First register AccessControlModule into your App/Root module.
+First, register AccessControlModule into your App/Root module.
 ```typescript
 import {Module} from "@nestjs/common";
 import {AccessControlModule} from "@acl-nest/AccessControlModule";
@@ -54,8 +54,8 @@ export class YourController {
 ```
 
 ### Custom validation function
-You can specify and override you validation logic if you need it. 
-Just specify function for validation same as it is in register module action.
+You can specify and override your validation logic if you need it.
+Just define the function for validation the same as it is in the register module action.
 ```typescript
 @Controller()
 export class YourController {
@@ -71,8 +71,8 @@ export class YourController {
 ```
 
 ### Direct call of AccessControlService logic
-Sometimes you need to check permission in deep context of your application. 
-In this case you can use AccessControlService directly. Just inject AccessControlService.
+Sometimes you need to check permission in the profound context of your application.
+In this case, you can use AccessControlService directly. Just inject AccessControlService.
 ```typescript
 @Controller()
 export class YourController {
@@ -97,10 +97,10 @@ export class YourController {
 ## Advanced usage
 
 ### More complex logic before handling permissions
-Sometime is necessary to load some user data, or handle some request to auth user before checking permissions.
-But registered validation function has available only ExecutionContext 
-which cannot help us to get some other service to load user for example.
-Good approach here is to use middlewares, which are executed before Guards or register module asynchronously.
+Sometimes is necessary to load some user data, or handle some requests to auth users before checking permissions.
+But the registered validation function has available only ExecutionContext
+which cannot help us to get some other service to load users for example.
+A good approach here is to use middleware executed before Guards or register modules asynchronously.
 
 #### 1. Register Module asynchronous with injected dependencies
 ```typescript
@@ -170,7 +170,7 @@ export class YourModule implements NestModule {
 ```
 
 ### Multiple parameters
-You can even specify multiple params like objects, actions from model.
+You can even specify multiple parameters like objects, and actions from a model.
 ```typescript
 @Controller()
 export class YourController {
@@ -188,6 +188,6 @@ export class YourController {
   }
 }
 ```
-In this case all combinations of specified params will be checked. 
-The reason why this functionality was created 
-is to have option check all permissions without specifying unnecessary aliases for other model properties.
+In this case, all combinations of specified parameters will be checked.
+The reason why this functionality was created
+is to have the option to check all permissions without specifying unnecessary aliases for other model properties.
