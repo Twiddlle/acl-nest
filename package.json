@@ -69,7 +69,7 @@
     "rxjs": ">=6.5.1"
   },
   "dependencies": {
-    "casbin": "^5.11.0",
+    "casbin": "^5.24.4",
     "reflect-metadata": "^0.1.13"
   }
 }

@@ -1,3 +1,6 @@
+import { setDefaultFileSystem } from 'casbin';
+import * as fs from 'fs';
+setDefaultFileSystem(fs as any);
 import { ForbiddenException, Injectable, OnModuleInit } from '@nestjs/common';
 import { newEnforcer, Model, StringAdapter } from 'casbin';
 import { ValidationFunction } from './AccessControlAction';
