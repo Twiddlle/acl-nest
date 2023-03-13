@@ -48,10 +48,14 @@ jobs:
         with:
           node-version: 15.x
           registry-url: 'https://registry.npmjs.org'
-      - run: npm i
-      - run: npm test
-      - run: npm run build
-      - run: cp ./.github/.npmrc .npmrc
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Set output
+          id: vars
+          run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+      - run: sed -i "s/0.0.0/${{ steps.vars.outputs.tag }}/" package.json
+      - run: cat package.json
+#      - run: npm i
+#      - run: npm run build
+#      - run: cp ./.github/.npmrc .npmrc
+#      - run: npm publish
+#        env:
+#          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
