@@ -2,13 +2,46 @@ name: Build
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, semver ]
 
 jobs:
-  publish:
 
+  test:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 15.x
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm i
+      - run: npm test
 
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Get Next Version
+        id: semver
+        uses: ietf-tools/semver-action@v1
+        with:
+          token: ${{ github.token }}
+          branch: semver
+
+#      - name: Create Release
+#        uses: ncipollo/release-action@v1.12.0
+#        with:
+#          allowUpdates: true
+#          draft: false
+#          makeLatest: true
+#          name: ${{ steps.semver.outputs.next }}
+#          body: Changelog Contents
+#          token: ${{ github.token }}
+
+  publish:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
