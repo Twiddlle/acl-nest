@@ -19,7 +19,7 @@ npm i acl-nest --save
 First, register AccessControlModule into your App/Root module.
 ```typescript
 import {Module} from "@nestjs/common";
-import {AccessControlModule} from "@acl-nest/AccessControlModule";
+import {AccessControlModule} from "acl-nest/AccessControlModule";
 import * as path from "path";
 
 @Module({
