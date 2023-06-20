@@ -54,7 +54,7 @@ export class TestingController {
   @Get('getAge')
   public async getAge(@Req() request: Request): Promise<number> {
     await this.accessControlService.checkPermission([
-      request.headers['x-user'],
+      request.headers['x-user'] as string,
       'age',
       'read',
     ]);

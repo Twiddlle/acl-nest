@@ -43,7 +43,7 @@ export class AccessControlService implements OnModuleInit {
   }
 
   public async hasPermission(params: (string | string[])[]): Promise<boolean> {
-    const multiParamsSet = [];
+    const multiParamsSet: Array<(string | string[])[]> = [];
     for (const paramIndex in params) {
       const param = params[paramIndex];
       if (param instanceof Array) {

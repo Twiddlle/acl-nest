@@ -34,7 +34,8 @@ export class AccessControlGuard implements CanActivate {
         this.accessControlService,
       );
     }
-    return this.accessControlService.validationFunction(
+
+    return this.accessControlService.validationFunction!(
       params,
       context,
       this.accessControlService,

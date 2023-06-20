@@ -40,15 +40,16 @@ export class AccessControlModule {
     };
   }
 
-  public static registerAsync(
-    options: {
-      inject?: Type<unknown>[];
-      imports?: Type<unknown>[];
-      useFactory: (...injectedDeps) => Promise<AccessControlModuleOptions> | AccessControlModuleOptions;
-    }
-  ): DynamicModule {
+  public static registerAsync(options: {
+    inject?: Type<unknown>[];
+    imports?: Type<unknown>[];
+    useFactory: (
+      ...injectedDeps
+    ) => Promise<AccessControlModuleOptions> | AccessControlModuleOptions;
+  }): DynamicModule {
+    const injected = options.inject instanceof Array ? options.inject : [];
     const providers: Provider[] = [
-      ...options.inject,
+      ...injected,
       {
         provide: AccessControlService,
         useFactory: async (
