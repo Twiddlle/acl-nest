@@ -6,9 +6,9 @@
 ![Top language](https://img.shields.io/github/languages/top/Twiddlle/acl-nest)
 ![Package downloads](https://img.shields.io/npm/dm/acl-nest)
 
-ACL nestjs module functionality using casbin package
+ACL nestjs module functionality using casbin package.
 
-Install package
+Install [package](https://www.npmjs.com/package/acl-nest) from npm.
 ```bash
 npm i acl-nest --save
 ```
