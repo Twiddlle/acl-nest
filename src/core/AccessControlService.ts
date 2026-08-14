@@ -2,14 +2,14 @@ import { setDefaultFileSystem } from 'casbin';
 import * as fs from 'fs';
 setDefaultFileSystem(fs as any);
 import { ForbiddenException, Injectable, OnModuleInit } from '@nestjs/common';
-import { newEnforcer, Model, StringAdapter } from 'casbin';
+import { newEnforcer, Enforcer, Model, StringAdapter } from 'casbin';
 import { ValidationFunction } from './AccessControlAction';
 import { AccessControlConfigParam } from './AccessControlActionTypes';
 import { readFileSync } from 'fs';
 
 @Injectable()
 export class AccessControlService implements OnModuleInit {
-  private enforcer;
+  private enforcer!: Enforcer;
 
   public constructor(
     private readonly modelPath: AccessControlConfigParam,
