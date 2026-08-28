@@ -44,7 +44,7 @@ export class AccessControlModule {
     inject?: Type<unknown>[];
     imports?: Type<unknown>[];
     useFactory: (
-      ...injectedDeps
+      ...injectedDeps: any[]
     ) => Promise<AccessControlModuleOptions> | AccessControlModuleOptions;
   }): DynamicModule {
     const injected = options.inject instanceof Array ? options.inject : [];

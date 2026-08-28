@@ -11,7 +11,7 @@ export type ValidationFunction = (
   params: (string | string[])[],
   context: ExecutionContext,
   accessControlService: AccessControlService,
-  ...any
+  ...rest: any[]
 ) => Promise<boolean> | boolean;
 
 export const AccessControlAction = (
